@@ -1,0 +1,80 @@
+*{
+    background:  #4A707A;
+    margin: 0;
+}
+.header{
+    overflow: hidden;
+    background:#7697A0;
+    padding: 10px;
+}
+
+.header h1{
+    background:#7697A0;
+    text-align: center;
+}
+.main-box {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.cal-box{
+    margin: 30px;
+    background: #509695;
+    width: 550px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.display-box{
+    width: 500px;
+    height: 500px;
+    background: #C2C8C5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen{
+    background: yellow;
+    padding: 20px;
+}
+
+.num-op-btns{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(5, auto);
+    background: orange;
+    width: 500px;
+    height: 500px;
+}
+.num-op-btns button{
+    background: #f5e7dd;
+}
+.grid-item-19 {
+    background: rgb(108, 186, 246);
+    grid-column: span 2;
+}
+
+.footer{
+    overflow: hidden;
+    background: #7697A0;
+    padding: 10px;
+}
+.footer h2{
+    background:#7697A0;
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */

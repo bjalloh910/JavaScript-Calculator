@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>JavaScript Calculator</title>
+</head>
+<body>
+    <header class="header"> 
+        <h1>Online Calculator</h1>
+    </header>
+
+    <main class="main-box">
+        <div class="cal-box">
+            <div class="display-box">
+                    <button onclick="displayText(this)">Press some numbers!</button> <!-- The (this) keyword refers to the element being triggered which is the button in this case allowing this button to be passed as an argument when the method is called -->
+                    <input type="text" id="updateDisplay" style="color:white; font-size:20px"></input>
+                <div class="num-op-btns">
+                    <button class="clearbtn" onclick="clearDisplay(this)">CLEAR</button>
+                    <button class="operatorBtn">+/-</button>
+                    <button class="operatorBtn">%%</button>
+                    <button class="operatorBtn">/</button>
+                    <button class="number" onclick="displayText(this)">7</button>
+                    <button class="number" onclick="displayText(this)">8</button>
+                    <button class="number" onclick="displayText(this)">9</button>
+                    <button class="operatorBtn">x</button>
+                    <button class="number" onclick="displayText(this)">4</button>
+                    <button class="number" onclick="displayText(this)">5</button>
+                    <button class="number" onclick="displayText(this)">6</button>
+                    <button class="operatorBtn">+</button>
+                    <button class="number" onclick="displayText(this)">1</button>
+                    <button class="number" onclick="displayText(this)">2</button>
+                    <button class="number" onclick="displayText(this)">3</button>
+                    <button class="operatorBtn">-</button>
+                    <button class="number" onclick="displayText(this)">0</button>
+                    <button class="operatorBtn" onclick="operate()">.</button>
+                    <button id="soultion" class="grid-item-19">=</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <h2>Made by Bintu Jalloh</h2>
+        </div>
+    </footer>
+<!-- This is the javascript -->
+    <script>
+
+        let num1 = 0; 
+        let num2 = 0;
+        let operator = "";
+        let storedValue = "";
+        let result;
+
+        function Add( num1, num2){
+            let sum = num1 + num2;
+            return sum;
+        }
+
+        function Subtract( num1, num2){
+            let diff = num1 - num2;
+            return diff;
+        }
+
+        function Multiply( num1, num2){
+            let product = num1 * num2;
+            return product;
+        }
+
+        function Divide( num1, num2){
+            let quotient = num1 / num2;
+            return quotient;
+        }
+
+// Creating a function that will show a display value when you click a button. store ‘display value’ in a variable  & i think i need a for loop 
+
+        const updateDisplay = document.getElementById('updateDisplay');
+        
+        function displayText(button){ //passing button so we can use it for any button
+            const btns = document.querySelectorAll('.number');
+            storedValue += button.textContent;  // so for the input I just had to change the field value to be the button's text content for it to work.
+            updateDisplay.value = storedValue;
+        }
+
+        function clearDisplay(){
+            storedValue = "";
+            updateDisplay.value = " "; 
+        }
+       
+
+        function operate(operator, num1, num2){
+            if( operator === '+'){
+                result = Add(num1, num2);
+                console.log("result: " + result);
+            } else if(operator === '-'){
+                result = Subtract(num1, num2);
+                console.log("result: " + result);
+            } else if(operator === 'x'){
+                result = Multiply(num1, num2);
+                console.log("result: " + result);
+            } else if(operator === '/'){
+                result = Divide(num1, num2);
+                console.log("result: " + result);
+            } else {
+                throw new Error("Invalid Operator")
+            }
+            return result;
+        }
+
+
+        const numbers = document.querySelectorAll('.number');
+        const operators = document.querySelectorAll('.operatorBtn');
+        const equalSign = document.getElementById('soultion');
+
+        numbers.forEach(number => {
+            number.addEventListener("click", e => {
+                if( operator === ""){
+                    num1 = parseFloat(storedValue);
+                    console.log(num1);
+                } else {
+                    num2 = parseFloat(storedValue);
+                    console.log(num2);
+                    operate(operator, num1, num2);
+                    operator = "";
+                }
+                storedValue = "";
+            })
+        })
+
+        
+        operators.forEach( op => {
+            op.addEventListener("click", e => {
+                operator = op.textContent;
+                console.log(operator);
+            })
+        })
+
+        equalSign.addEventListener('click', e => {
+            updateDisplay.value = result;
+        })
+
+
+    </script>
+</body>
+</html>
