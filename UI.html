@@ -14,12 +14,11 @@
     <main class="main-box">
         <div class="cal-box">
             <div class="display-box">
-                    <button onclick="displayText(this)">Press some numbers!</button> <!-- The (this) keyword refers to the element being triggered which is the button in this case allowing this button to be passed as an argument when the method is called -->
-                    <input type="text" id="updateDisplay" style="color:white; font-size:20px"></input>
+                    <input type="text" id="updateDisplay" onclick="displayText(this)" style="color:white; font-size:20px"></input> <!--The (this) keyword refers to the element being triggered which is the button in this case allowing this button to be passed as an argument when the method is called -->
                 <div class="num-op-btns">
                     <button class="clearbtn" onclick="clearDisplay(this)">CLEAR</button>
                     <button class="operatorBtn">+/-</button>
-                    <button class="operatorBtn">%%</button>
+                    <button class="operatorBtn">%</button>
                     <button class="operatorBtn">/</button>
                     <button class="number" onclick="displayText(this)">7</button>
                     <button class="number" onclick="displayText(this)">8</button>
@@ -52,8 +51,8 @@
         let num1 = 0; 
         let num2 = 0;
         let operator = "";
-        let storedValue = "";
         let result;
+        let storedValue = "";
 
         function Add( num1, num2){
             let sum = num1 + num2;
@@ -75,19 +74,21 @@
             return quotient;
         }
 
-// Creating a function that will show a display value when you click a button. store ‘display value’ in a variable  & i think i need a for loop 
 
-        const updateDisplay = document.getElementById('updateDisplay');
-        
-        function displayText(button){ //passing button so we can use it for any button
-            const btns = document.querySelectorAll('.number');
-            storedValue += button.textContent;  // so for the input I just had to change the field value to be the button's text content for it to work.
-            updateDisplay.value = storedValue;
+        const updateDisplay = document.getElementById('updateDisplay'); 
+       
+        function displayText(button){ 
+            storedValue += button.textContent;  
+            updateDisplay.value = storedValue;  
         }
 
         function clearDisplay(){
             storedValue = "";
-            updateDisplay.value = " "; 
+            num1 = 0;
+            num2 = 0;
+            operator = "";
+            result = undefined;
+            updateDisplay.value = "";
         }
        
 
@@ -117,31 +118,29 @@
 
         numbers.forEach(number => {
             number.addEventListener("click", e => {
-                if( operator === ""){
-                    num1 = parseFloat(storedValue);
+                if( operator === ""){ 
+                    num1 += parseFloat(storedValue); 
                     console.log(num1);
                 } else {
-                    num2 = parseFloat(storedValue);
+                    num2 += parseFloat(storedValue); 
                     console.log(num2);
-                    operate(operator, num1, num2);
-                    operator = "";
+                    operate(operator, num1, num2);  
+                    operator = "";   
                 }
-                storedValue = "";
+                storedValue = ""; 
             })
         })
 
-        
         operators.forEach( op => {
-            op.addEventListener("click", e => {
-                operator = op.textContent;
-                console.log(operator);
+            op.addEventListener("click", e => { 
+                operator = op.textContent; 
+                console.log(operator);   
             })
         })
 
         equalSign.addEventListener('click', e => {
             updateDisplay.value = result;
         })
-
 
     </script>
 </body>
