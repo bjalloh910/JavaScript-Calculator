@@ -75,14 +75,15 @@
         }
 
 
-        const updateDisplay = document.getElementById('updateDisplay'); 
+        const updateDisplay = document.getElementById('updateDisplay'); //just grabbing the input field so we can alter it
        
-        function displayText(button){ 
-            storedValue += button.textContent;  
-            updateDisplay.value = storedValue;  
+        // this function works for any button that has the onclick calling this function
+        function displayText(button){ //passing button so we can use it for the button clicked
+            storedValue += button.textContent; // appends text content of the button clicked to the storeValue variable
+            updateDisplay.value = storedValue; // making the display show that storedValue
         }
 
-        function clearDisplay(){
+        function clearDisplay(){ //clearing everything
             storedValue = "";
             num1 = 0;
             num2 = 0;
@@ -118,26 +119,28 @@
 
         numbers.forEach(number => {
             number.addEventListener("click", e => {
-                if( operator === ""){ 
-                    num1 += parseFloat(storedValue); 
-                    console.log(num1);
+                if( operator === ""){ // if an operator hasn't been picked yet 
+                    num1 += parseFloat(storedValue); // make the number clicked the first num
+                    console.log(num1); 
                 } else {
-                    num2 += parseFloat(storedValue); 
+                    num2 += parseFloat(storedValue); // if an operator has been picked make the number inputed the second num
                     console.log(num2);
-                    operate(operator, num1, num2);  
-                    operator = "";   
+                    operate(operator, num1, num2); // and now you can preform the calculation 
+                    operator = "";   //reset the operator you can prepare it for a new operation. If the operator is not reset, the calculator might incorrectly interpret the next number input as part of the previous calculation, leading to incorrect results.
                 }
-                storedValue = ""; 
+                storedValue = ""; // reset the stored value for the same
             })
         })
 
+        // adding an event listener to each operator button so you can capture the operator when the user clicks on one.
         operators.forEach( op => {
-            op.addEventListener("click", e => { 
-                operator = op.textContent; 
-                console.log(operator);   
+            op.addEventListener("click", e => { //when a user clicks on a operator button
+                operator = op.textContent; // it takes the textContent from it and store(or assigns) it the operator vairable to be used
+                console.log(operator);    // ex: if the user clicks on the addition button (+), operator will be assigned the value "+"
             })
         })
-
+        
+        // add a click event listener to the equal sign button, enabling you to trigger a calculation and update the display when the user clicks on it.
         equalSign.addEventListener('click', e => {
             updateDisplay.value = result;
         })
